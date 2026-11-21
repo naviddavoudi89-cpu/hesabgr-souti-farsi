@@ -28,7 +28,7 @@ jobs:
           gradle-version: '8.9'
 
       - name: Build APK
-        run: gradle --settings-file settings.gradle.kts --no-daemon --info assembleDebug
+        run: gradle --settings-file settings.gradle --no-daemon --info assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
