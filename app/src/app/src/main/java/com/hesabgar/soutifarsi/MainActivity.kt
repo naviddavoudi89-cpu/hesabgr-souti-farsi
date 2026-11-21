@@ -76,7 +76,7 @@ val text = expression.text.toString()
 .replace('۹', '9')
 .replace('٫', '.')
 
-val pattern = Regex("""^(-?\d+(?:\".\d+)"?)([+\-×÷*/])(-?\d+(?:\".\d+)"?)$""")
+val val pattern = Regex("""^(-?\d+(?:\".\d+)"?)([+\-×÷*/])(-?\d+(?:\".\d+)"?)$""")
 val match = pattern.matchEntire(text)
 
 if (match == null) {
