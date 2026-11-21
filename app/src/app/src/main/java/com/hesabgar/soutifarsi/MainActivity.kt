@@ -18,6 +18,7 @@ private lateinit var result: TextView
 override fun onCreate(savedInstanceState: Bundle?) {
 super.onCreate(savedInstanceState)
 
+try {
 val page = LinearLayout(this).apply {
 orientation = LinearLayout.VERTICAL
 gravity = Gravity.CENTER
@@ -43,7 +44,9 @@ singleLine = true
 val calculate = Button(this).apply {
 text = "محاسبه"
 textSize = 18f
-setOnClickListener { calculateResult() }
+setOnClickListener {
+calculateResult()
+}
 }
 
 result = TextView(this).apply {
@@ -59,9 +62,20 @@ page.addView(calculate)
 page.addView(result)
 
 setContentView(page)
+
+} catch (e: Exception) {
+val error = TextView(this).apply {
+text = "خطای اجرا:\n${e.javaClass.simpleName}\n${e.message}"
+textSize = 18f
+setTextColor(Color.RED)
+setPadding(24, 32, 24, 32)
+}
+setContentView(error)
+}
 }
 
 private fun calculateResult() {
+try {
 val text = expression.text.toString()
 .replace(" ", "")
 .replace('۰', '0')
@@ -76,11 +90,14 @@ val text = expression.text.toString()
 .replace('۹', '9')
 .replace('٫', '.')
 
-val val pattern = Regex("""^(-?\d+(?:\".\d+)"?)([+\-×÷*/])(-?\d+(?:\".\d+)"?)$""")
+val pattern = Regex(
+"""^(-?\d+(?:\".\d+)"?)([+\-×÷*/])(-?\d+(?:\".\d+)"?)$"""
+)
+
 val match = pattern.matchEntire(text)
 
 if (match == null) {
-result.text = "لطفاً یک عبارت ساده مثل ۱۲ + ۳ وارد کن"
+result.text = "مثلاً ۱۲ + ۳ وارد کن"
 return
 }
 
@@ -103,5 +120,9 @@ else -> return
 }
 
 result.text = "نتیجه: $answer"
+
+} catch (e: Exception) {
+result.text = "خطا: ${e.message}"
+}
 }
 }
