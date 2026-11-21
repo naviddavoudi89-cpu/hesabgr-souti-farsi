@@ -44,9 +44,7 @@ singleLine = true
 val calculate = Button(this).apply {
 text = "محاسبه"
 textSize = 18f
-setOnClickListener {
-calculateResult()
-}
+setOnClickListener { calculateResult() }
 }
 
 result = TextView(this).apply {
