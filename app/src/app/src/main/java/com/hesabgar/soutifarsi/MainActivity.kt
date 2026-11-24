@@ -61,7 +61,7 @@ page.addView(result)
 
 setContentView(page)
 
-} catch (e: Exception) {
+} catch (e: Throwable) {
 val error = TextView(this).apply {
 text = "خطای اجرا:\n${e.javaClass.simpleName}\n${e.message}"
 textSize = 18f
